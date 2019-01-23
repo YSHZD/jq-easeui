@@ -4,6 +4,7 @@ $("#listData").datagrid({
     	var rowDatas = data.rows;
     	var merges = [];
     	var temp = [];
+    	debugger
     	for(var i = 0; i < len-1; i++){
     		if(rowDatas[i]['expertName']==rowDatas[i+1]['expertName']){
     			continue;
@@ -20,7 +21,7 @@ $("#listData").datagrid({
     			})
     		}else{
     			merges.push({
-    				'index':temp[j]-1,
+    				'index':temp[j-1]+1,
     				'rowspan':temp[j]-temp[j-1]
     			})
     		}
@@ -41,4 +42,4 @@ $("#listData").datagrid({
              });
      }
     }
-});
+}); 
