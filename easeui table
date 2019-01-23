@@ -1,0 +1,44 @@
+$("#listData").datagrid({
+    onLoadSuccess: function(data){
+    	var len = data.rows.length;
+    	var rowDatas = data.rows;
+    	var merges = [];
+    	var temp = [];
+    	for(var i = 0; i < len-1; i++){
+    		if(rowDatas[i]['expertName']==rowDatas[i+1]['expertName']){
+    			continue;
+    		}else{
+    			temp.push(i);
+    		}
+    	}
+    	var templen = temp.length;
+    	for(var j = 0; j < templen; j++){
+    		if(j == 0){
+    			merges.push({
+    				'index':0,
+    				'rowspan':temp[j]+1
+    			})
+    		}else{
+    			merges.push({
+    				'index':temp[j]-1,
+    				'rowspan':temp[j]-temp[j-1]
+    			})
+    		}
+    	}
+		if(temp[templen-1]<=len){
+			merges.push({
+				'index':temp[templen-1]-1,
+				'rowspan':len-temp[templen-1]-1
+			})
+		}
+         
+         console.log(merges)
+         for(var i=0; i<merges.length; i++){
+             $('#listData').datagrid('mergeCells',{
+                 index:merges[i].index,
+                 field:'expertName',
+                 rowspan:merges[i].rowspan
+             });
+     }
+    }
+});
