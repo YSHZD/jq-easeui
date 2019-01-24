@@ -70,3 +70,63 @@ var datas = [
 		console.log(out);
 	}
 	changeDate(datas)
+	
+	
+	function group(arr,num){
+		var arr = quickSort(arr);
+		arr = arr.reverse();
+		console.log(arr)
+		var endArr = [];
+		var arrLen = arr.length;
+		for(var i = 0; i < num; i++){
+			endArr.push({
+				'data':[],
+				'sum':0
+			})
+		}
+		for(var i = 0; i < arrLen; i++){
+			(function(i){
+				var index = minArr(endArr);
+				endArr[index].data.push(arr[i]);
+				endArr[index].sum = endArr[index].sum + arr[i];
+			})(i)
+			
+		}
+		for(var i = 0; i < num; i++){
+			endArr[i].data = endArr[i].data.sort(function(a,b){
+				return Math.random()>=0.5
+			})
+		}
+		console.log(endArr)
+	}
+	function minArr(arr){
+		var minKey = 0;
+		var len = arr.length;
+		for(var i = 1; i < len; i++){
+			if(arr[minKey].sum > arr[i].sum){
+				minKey = i
+			}
+		}
+		return minKey;
+	}
+
+function quickSort(arr){
+	if(arr.length <= 1){
+		return arr
+	}
+	var basePoint = Math.floor(arr.length/2);
+	var point = arr.splice(basePoint,1)[0];
+	var left = [];
+	var right = [];
+	for( var i = 0; i < arr.length; i++){
+		if(arr[i] < point){
+			left.push(arr[i])
+		}else{
+			right.push(arr[i])
+		}
+	}
+	return quickSort(left).concat([point],quickSort(right));
+}
+var arr = [2,3,4,5,6,3,23,4,3,4,2,34,6,23,32,34,54,43,23,43,34,2,3,34,23,2,12,23,43,23,1,14,15,15,16,16,17,18,9,13,15];
+group(arr,3);
+数组分组 每组相差最小
