@@ -1,4 +1,4 @@
-# jq-easeui 数组算法
+# jq-easeui 数组算法（数组分多个组  每组数组和相差最小）
 jq easeui 数组算法
 数组相邻合并
 var datas = [
