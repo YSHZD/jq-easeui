@@ -1,5 +1,5 @@
-# jq-easeui
-jq easeui
+# jq-easeui 数组算法
+jq easeui 数组算法
 数组相邻合并
 var datas = [
 		{'name':'a','age':26}, // 0
