@@ -130,3 +130,26 @@ function quickSort(arr){
 var arr = [2,3,4,5,6,3,23,4,3,4,2,34,6,23,32,34,54,43,23,43,34,2,3,34,23,2,12,23,43,23,1,14,15,15,16,16,17,18,9,13,15];
 group(arr,3);
 数组分组 每组相差最小
+
+
+
+
+
+
+var arr2 = [2,3,4,5,6,3,23,4,3,4,2,34,6,23,32,34,54,43,23,43,34,2,3,34,23,2,12,23,43,23,1,14,15,15,16,16,17,18,9,13,15];
+function randoms(arr,index){
+	console.log(arr)
+	if(index>(arr.length-1)||index<0){
+		return arr
+	}
+	var nochange = arr.splice(index,1);
+	var arr = randomdata(arr);
+	arr.splice(index,0,nochange[0]);
+	return arr;
+}
+function randomdata(arr){
+	return arr.sort(function(a,b){
+		return Math.random()>=0.5
+	})
+}
+ console.log(randoms(arr2,5))//数组随机   指定某个不变
