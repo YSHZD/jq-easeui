@@ -153,3 +153,46 @@ function randomdata(arr){
 	})
 }
  console.log(randoms(arr2,5))//数组随机   指定某个不变
+ 
+ 
+ 
+ $.extend($.fn.datagrid.methods, {
+    getEditingRowIndexs: function(jq) {
+        var rows = $.data(jq[0], "datagrid").panel.find('.datagrid-row-editing');
+        var indexs = [];
+        rows.each(function(i, row) {
+            var index = row.sectionRowIndex;
+            if (indexs.indexOf(index) == -1) {
+                indexs.push(index);
+            }
+        });
+        return indexs;
+    }
+});
+function getData(){
+	 var val = $(".datagrid-editable-input").eq(0).val(); 
+	 var index = $('#listData').datagrid('getEditingRowIndexs')
+	 if(!!val){
+		 console.log('当前编辑未失去焦点='+index+'当前值='+val)
+	 }
+	
+	console.log($('#listData').datagrid('getChanges'))
+}
+var editIndex = undefined;
+function endEditing(){
+	if (editIndex == undefined){return true}
+	if ($('#listData').datagrid('validateRow', editIndex)){
+		$('#listData').datagrid('endEdit', editIndex);
+		editIndex = undefined;
+		return true;
+	} else {
+		return false;
+	}
+}
+function onClickCell(index, field){
+	if (endEditing()){
+		$('#listData').datagrid('selectRow', index)
+				.datagrid('editCell', {index:index,field:field});
+		editIndex = index;
+	}
+}
